@@ -36,11 +36,15 @@ class LocalDataSource internal constructor(
     }
 
     override suspend fun saveNote(Note: Note) {
-        TODO("Not yet implemented")
+        withContext(ioDispatcher){
+            noteDao.insert(note = Note)
+        }
     }
 
     override suspend fun deleteAllNotes() {
-        TODO("Not yet implemented")
+        withContext(ioDispatcher){
+            noteDao.deleteAllNotes()
+        }
     }
 
     override suspend fun deleteNote(NoteId: String) {

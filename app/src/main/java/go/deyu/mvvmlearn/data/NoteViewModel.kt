@@ -2,6 +2,7 @@ package go.deyu.mvvmlearn.data
 
 import android.app.Application
 import androidx.lifecycle.*
+import go.deyu.mvvmlearn.App
 import kotlinx.coroutines.launch
 import kotlin.Result
 
@@ -10,8 +11,19 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     val allNotes: LiveData<List<Note>>;
 
     init {
-        repository = ServiceLocator.provideNoteRepository(application)
+        repository = (application as App).noteRepository
         allNotes = repository.observeNotes().switchMap { filterNotes(it) }
+    }
+
+    fun insertNote(note: Note){
+        viewModelScope.launch {
+            repository.saveNote(note)
+        }
+    }
+    fun deleteAllNote(){
+        viewModelScope.launch {
+            repository.deleteAllNotes()
+        }
     }
 
     private fun filterNotes(tasksResult: go.deyu.mvvmlearn.data.Result<List<Note>>): LiveData<List<Note>> {
