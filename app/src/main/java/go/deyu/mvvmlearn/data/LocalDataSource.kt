@@ -31,24 +31,38 @@ class LocalDataSource internal constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getNote(NoteId: String): Result<Note> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getNote(NoteId: Int): Result<Note> =
+        withContext(ioDispatcher) {
+            try {
+                val noteById = noteDao.getNoteById(NoteId)
+                if(noteById == null){
+                    throw Exception("Not found this id=${NoteId} note ")
+                }
+                Result.Success(noteById)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+
 
     override suspend fun saveNote(Note: Note) {
-        withContext(ioDispatcher){
-            noteDao.insert(note = Note)
+        withContext(ioDispatcher) {
+            noteDao.upsert(note = Note)
         }
     }
 
     override suspend fun deleteAllNotes() {
-        withContext(ioDispatcher){
+        withContext(ioDispatcher) {
             noteDao.deleteAllNotes()
         }
     }
 
-    override suspend fun deleteNote(NoteId: String) {
-        TODO("Not yet implemented")
+    override suspend fun deleteNote(NoteId: Int) {
+        withContext(ioDispatcher) {
+            val noteById = noteDao.getNoteById(NoteId)
+            if (noteById != null)
+                noteDao.delete(noteById)
+        }
     }
 
 }

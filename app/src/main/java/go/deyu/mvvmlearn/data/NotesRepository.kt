@@ -10,11 +10,11 @@ interface NotesRepository {
 
     suspend fun refreshNotes()
 
-    suspend fun getNote(NoteId: String, forceUpdate: Boolean = false): Result<Note>
+    suspend fun getNote(NoteId: Int, forceUpdate: Boolean = false): Result<Note>
 
     suspend fun saveNote(Note: Note)
 
     suspend fun deleteAllNotes()
 
-    suspend fun deleteNote(NoteId: String)
+    suspend fun deleteNote(NoteId: Int)
 }

@@ -25,7 +25,7 @@ class DefaultNotesRepository(
         noteDataSource.refreshNotes()
     }
 
-    override suspend fun getNote(NoteId: String, forceUpdate: Boolean): Result<Note> {
+    override suspend fun getNote(NoteId: Int, forceUpdate: Boolean): Result<Note> {
         return noteDataSource.getNote(NoteId)
     }
 
@@ -37,7 +37,7 @@ class DefaultNotesRepository(
         noteDataSource.deleteAllNotes()
     }
 
-    override suspend fun deleteNote(NoteId: String) {
+    override suspend fun deleteNote(NoteId: Int) {
         noteDataSource.deleteNote(NoteId)
     }
 

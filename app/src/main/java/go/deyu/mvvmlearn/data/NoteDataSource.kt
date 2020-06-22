@@ -10,11 +10,11 @@ interface NoteDataSource {
 
     suspend fun refreshNotes()
 
-    suspend fun getNote(NoteId: String): Result<Note>
+    suspend fun getNote(NoteId: Int): Result<Note>
 
     suspend fun saveNote(Note: Note)
 
     suspend fun deleteAllNotes()
 
-    suspend fun deleteNote(NoteId: String)
+    suspend fun deleteNote(NoteId: Int)
 }

@@ -20,6 +20,13 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
             repository.saveNote(note)
         }
     }
+
+    fun deleteNote(note: Note) {
+        viewModelScope.launch{
+            repository.deleteNote(note.id)
+        }
+    }
+
     fun deleteAllNote(){
         viewModelScope.launch {
             repository.deleteAllNotes()
@@ -46,5 +53,6 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         }
         return tasksToShow
     }
+
 
 }

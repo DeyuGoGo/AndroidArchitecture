@@ -11,4 +11,7 @@ data class Note(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+        set(value) {
+            field = value
+        }
 }
