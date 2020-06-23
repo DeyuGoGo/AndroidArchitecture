@@ -1,7 +1,6 @@
-package go.deyu.mvvmlearn
+package go.deyu.mvvmlearn.main
 
 import android.content.Intent
-import android.nfc.NfcAdapter.EXTRA_ID
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -11,11 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import go.deyu.mvvmlearn.R
 import go.deyu.mvvmlearn.addnote.AddEditNoteActivity
 import go.deyu.mvvmlearn.data.Note
-import go.deyu.mvvmlearn.data.NoteViewModel
-import go.deyu.mvvmlearn.main.NoteAdapter
+import go.deyu.mvvmlearn.data.NoteDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     val mNoteViewModel: NoteViewModel by viewModels()
@@ -37,11 +37,8 @@ class MainActivity : AppCompatActivity() {
         recycler_view.adapter = adapter
         mNoteViewModel.allNotes.observe(this, object :Observer<List<Note>>{
             override fun onChanged(t: List<Note>?) {
-                if(t==null)
-                    return
-                adapter.setNotes(t)
-                Toast.makeText(this@MainActivity,"onChanged size is ${t.size}",Toast.LENGTH_SHORT).show()
-            }
+                adapter.submitList(t)
+        }
         })
         btn_add.setOnClickListener { startActivity(Intent(this,AddEditNoteActivity::class.java)) }
         btn_delete.setOnClickListener { mNoteViewModel.deleteAllNote() }

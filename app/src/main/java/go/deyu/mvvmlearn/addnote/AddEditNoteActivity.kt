@@ -35,7 +35,7 @@ class AddEditNoteActivity : AppCompatActivity() {
         if (intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Note")
             id = intent.getIntExtra(EXTRA_ID, 0)
-            viewModel.getNote(id!!)
+            viewModel.getNote(id)
         } else {
             setTitle("Add note")
         }

@@ -5,14 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import go.deyu.mvvmlearn.R
 import go.deyu.mvvmlearn.data.Note
 
-class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
-
+class NoteAdapter :
+    ListAdapter<Note, NoteAdapter.NoteHolder>(diffCallback) {
     private val TAG = "NoteAdapter"
-    private var notes: List<Note> = ArrayList()
+
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<Note>(){
+            override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+                return oldItem.id == newItem.id
+
+            }
+
+            override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
     var listener: OnItemClickListener? = null
         set(value) {
             field = value
@@ -24,24 +39,15 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
         return NoteHolder(itemview)
     }
 
-    override fun getItemCount(): Int {
-        return notes.size
-    }
-
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
-        val currentNote = notes.get(position)
+        val currentNote = getItem(position)
         holder.tv_title.setText(currentNote.title)
         holder.tv_descrition.setText(currentNote.description)
         holder.tv_priority.setText(currentNote.priority.toString())
     }
 
-    fun setNotes(notes: List<Note>) {
-        this.notes = notes
-        notifyDataSetChanged()
-    }
-
     fun getNoteAt(index: Int): Note {
-        return this.notes.get(index = index)
+        return getItem(index)
     }
 
     interface OnItemClickListener {
@@ -59,7 +65,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
             tv_priority = itemView.findViewById(R.id.tv_priority)
             itemView.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    listener?.onItemClick(notes.get(adapterPosition))
+                    listener?.onItemClick(getItem(adapterPosition))
                 }
             }
         }

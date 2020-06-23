@@ -11,6 +11,7 @@ class LocalDataSource internal constructor(
     private val noteDao: NoteDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : NoteDataSource {
+    private val db :NoteDatabase? = null
     override fun observeNotes(): LiveData<Result<List<Note>>> {
         return noteDao.observeNotes().map {
             Result.Success(it)

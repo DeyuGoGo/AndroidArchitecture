@@ -6,7 +6,7 @@ import androidx.room.*
 
 @Dao
 interface NoteDao {
-    
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(note: Note):Long
     @Update(onConflict = OnConflictStrategy.IGNORE)

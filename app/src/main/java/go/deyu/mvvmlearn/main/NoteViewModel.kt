@@ -1,17 +1,20 @@
-package go.deyu.mvvmlearn.data
+package go.deyu.mvvmlearn.main
 
 import android.app.Application
 import androidx.lifecycle.*
 import go.deyu.mvvmlearn.App
+import go.deyu.mvvmlearn.data.DefaultNotesRepository
+import go.deyu.mvvmlearn.data.Note
+import go.deyu.mvvmlearn.data.NotesRepository
 import kotlinx.coroutines.launch
-import kotlin.Result
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class NoteViewModel(application: Application) : AndroidViewModel(application) {
-    val repository: NotesRepository
+class NoteViewModel(application: Application) : AndroidViewModel(application) , KoinComponent{
+    val repository: DefaultNotesRepository by inject()
     val allNotes: LiveData<List<Note>>;
 
     init {
-        repository = (application as App).noteRepository
         allNotes = repository.observeNotes().switchMap { filterNotes(it) }
     }
 
@@ -53,6 +56,5 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         }
         return tasksToShow
     }
-
 
 }
