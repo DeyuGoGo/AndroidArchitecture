@@ -1,6 +1,7 @@
-package go.deyu.mvvmlearn.data
+package go.deyu.mvvmlearn.data.note
 
 import androidx.lifecycle.LiveData
+import go.deyu.mvvmlearn.data.Result
 
 interface NotesRepository {
 

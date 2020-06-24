@@ -1,7 +1,8 @@
-package go.deyu.mvvmlearn.data
+package go.deyu.mvvmlearn.data.note
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import go.deyu.mvvmlearn.data.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -11,7 +12,7 @@ class LocalDataSource internal constructor(
     private val noteDao: NoteDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : NoteDataSource {
-    private val db :NoteDatabase? = null
+    private val db : NoteDatabase? = null
     override fun observeNotes(): LiveData<Result<List<Note>>> {
         return noteDao.observeNotes().map {
             Result.Success(it)

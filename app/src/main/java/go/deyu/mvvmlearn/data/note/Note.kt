@@ -1,4 +1,4 @@
-package go.deyu.mvvmlearn.data
+package go.deyu.mvvmlearn.data.note
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

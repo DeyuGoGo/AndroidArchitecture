@@ -1,11 +1,9 @@
-package go.deyu.mvvmlearn.data
+package go.deyu.mvvmlearn.data.note
 
 import androidx.lifecycle.LiveData
-import go.deyu.mvvmlearn.data.NoteDataSource
+import go.deyu.mvvmlearn.data.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import org.koin.java.KoinJavaComponent.get
-import org.koin.java.KoinJavaComponent.inject
 
 class DefaultNotesRepository(
     private val noteDataSource: NoteDataSource,

@@ -1,7 +1,8 @@
-package go.deyu.mvvmlearn.data
+package go.deyu.mvvmlearn.data.note
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import go.deyu.mvvmlearn.data.note.Note
 
 
 @Dao

@@ -3,7 +3,6 @@ package go.deyu.mvvmlearn.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -12,10 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import go.deyu.mvvmlearn.R
 import go.deyu.mvvmlearn.addnote.AddEditNoteActivity
-import go.deyu.mvvmlearn.data.Note
-import go.deyu.mvvmlearn.data.NoteDatabase
+import go.deyu.mvvmlearn.data.note.Note
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     val mNoteViewModel: NoteViewModel by viewModels()

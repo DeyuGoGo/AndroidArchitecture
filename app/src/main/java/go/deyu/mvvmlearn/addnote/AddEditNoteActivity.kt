@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import go.deyu.mvvmlearn.R
-import go.deyu.mvvmlearn.data.Note
+import go.deyu.mvvmlearn.data.note.Note
 import kotlinx.android.synthetic.main.activity_add_note.*
 
 class AddEditNoteActivity : AppCompatActivity() {
@@ -65,7 +65,11 @@ class AddEditNoteActivity : AppCompatActivity() {
             Toast.makeText(this, "幹你是不會輸入資料？", Toast.LENGTH_SHORT).show()
             return
         }
-        val note = Note(title, description, np_priority.value)
+        val note = Note(
+            title,
+            description,
+            np_priority.value
+        )
         note.id = id
         viewModel.saveNote(note)
         finish()

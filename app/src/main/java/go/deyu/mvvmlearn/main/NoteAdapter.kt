@@ -1,6 +1,5 @@
 package go.deyu.mvvmlearn.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import go.deyu.mvvmlearn.R
-import go.deyu.mvvmlearn.data.Note
+import go.deyu.mvvmlearn.data.note.Note
 
 class NoteAdapter :
     ListAdapter<Note, NoteAdapter.NoteHolder>(diffCallback) {

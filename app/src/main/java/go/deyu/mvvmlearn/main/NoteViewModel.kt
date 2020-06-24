@@ -2,10 +2,8 @@ package go.deyu.mvvmlearn.main
 
 import android.app.Application
 import androidx.lifecycle.*
-import go.deyu.mvvmlearn.App
-import go.deyu.mvvmlearn.data.DefaultNotesRepository
-import go.deyu.mvvmlearn.data.Note
-import go.deyu.mvvmlearn.data.NotesRepository
+import go.deyu.mvvmlearn.data.note.DefaultNotesRepository
+import go.deyu.mvvmlearn.data.note.Note
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
