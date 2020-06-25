@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="go.deyu.mvvmlearn">
 
+    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -10,9 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".addnote.AddEditNoteActivity"
-            android:parentActivityName=".main.MainActivity"/>
-        <activity android:name=".main.MainActivity"
+        <activity
+            android:name=".block.BlockRuleActivity"
+            android:label="@string/title_activity_block_rule"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <service
+            android:name=".service.MyConnectionService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
+            <intent-filter>
+                <action android:name="android.telecom.ConnectionService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".addnote.AddEditNoteActivity"
+            android:parentActivityName=".main.MainActivity" />
+        <activity
+            android:name=".main.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
